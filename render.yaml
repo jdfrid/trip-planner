@@ -1,0 +1,41 @@
+# Render Blueprint - Deploy TripCraft
+# https://render.com/docs/blueprint-spec
+
+services:
+  # Backend API
+  - type: web
+    name: tripcraft-api
+    runtime: node
+    region: frankfurt
+    plan: free
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+    autoDeploy: true
+    healthCheckPath: /health
+
+  # Frontend Static Site  
+  - type: web
+    name: tripcraft-frontend
+    runtime: static
+    region: frankfurt
+    plan: free
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://tripcraft-api.onrender.com
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=31536000
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    autoDeploy: true
+
