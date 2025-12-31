@@ -7,10 +7,10 @@
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
     "seed": "node src/seeds/seedData.js",
-    "postinstall": "node src/seeds/seedData.js"
+    "build": "npm install && node src/seeds/seedData.js"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": "18.x"
   },
   "dependencies": {
     "better-sqlite3": "^9.4.3",
