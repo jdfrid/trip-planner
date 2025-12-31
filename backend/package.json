@@ -7,13 +7,12 @@
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
     "seed": "node src/seeds/seedData.js",
-    "build": "npm install && node src/seeds/seedData.js"
+    "build": "node src/seeds/seedData.js"
   },
   "engines": {
     "node": "18.x"
   },
   "dependencies": {
-    "better-sqlite3": "^9.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.1",
     "express": "^4.18.2",
